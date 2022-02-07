@@ -36,15 +36,20 @@ const contentArray = backfrogArray.map((item) => {
     
      <li class='feature backpack__age'> Item age: <span>${item.backpackAge()}</span></li>
      </ul>
-     <button class='lid-toggle'> Open lid </button>
+     <button class='lid-toggle'> Open Lid </button>
      `;
 
   const buttontoggle = back_frogArticle.querySelector(".lid-toggle");
   const lidStatus = back_frogArticle.querySelector(".backpack__lid span");
+
   buttontoggle.addEventListener(
     "click",
     (e) => {
       console.log(e);
+      buttontoggle.innerText === "Open Lid"
+        ? (buttontoggle.innerText = "Close Lid")
+        : (buttontoggle.innerText = "Open Lid");
+
       lidStatus.innerText === "open"
         ? (lidStatus.innerText = "closed")
         : (lidStatus.innerText = "open");
