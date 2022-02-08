@@ -42,10 +42,21 @@ const contentArray = backfrogArray.map((item) => {
   const buttontoggle = back_frogArticle.querySelector(".lid-toggle");
   const lidStatus = back_frogArticle.querySelector(".backpack__lid span");
 
+  //Remember we could use  this.innerText if it was a function
+  //declaration since array function expression does not have this.
+  //that why we used buttontoggle.innerText
+
+  // buttontoggle.addEventListener(
+  //   "click",
+  //   function(e){
+  //     this.innerText === "Open Lid"
+  //       ? (this.innerText = "Close Lid")
+  //       : (this.innerText = "Open Lid");
+  //   })
+
   buttontoggle.addEventListener(
     "click",
     (e) => {
-      console.log(e);
       buttontoggle.innerText === "Open Lid"
         ? (buttontoggle.innerText = "Close Lid")
         : (buttontoggle.innerText = "Open Lid");
