@@ -1,7 +1,14 @@
 import backfrogArray from "./component/data.js";
 
-const findPackId = function () {
-  const findId = backfrogArray.find(({ id }) => id === this.parentElement.id);
+//create a callback function with args
+//Note when callback fcn has arg, we call it inside
+//arrou fcn with open-close parenthesis: ()=>{callback(arg)}
+const findPackId = function (newArg, buttontoggle, event) {
+  console.log(newArg);
+  console.log(event);
+  const findId = backfrogArray.find(
+    ({ id }) => id === buttontoggle.parentElement.id // parentElement = article created
+  );
 
   //toggle lid open status
   findId.lidOpend === true
@@ -9,12 +16,14 @@ const findPackId = function () {
     : (findId.lidOpend = true);
 
   //toggle button text
-  this.innerText === "Open Lid"
-    ? (this.innerText = "Close Lid")
-    : (this.innerText = "Open Lid");
+  buttontoggle.innerText === "Open Lid"
+    ? (buttontoggle.innerText = "Close Lid")
+    : (buttontoggle.innerText = "Open Lid");
 
   //set the lid status
-  let lidStatus = this.parentElement.querySelector(".backpack__lid span");
+  let lidStatus = buttontoggle.parentElement.querySelector(
+    ".backpack__lid span"
+  );
   lidStatus.innerText === "closed"
     ? (lidStatus.innerText = "open")
     : (lidStatus.innerText = "closed");
@@ -58,12 +67,14 @@ const contentArray = backfrogArray.map((item) => {
 
   const buttontoggle = back_frogArticle.querySelector(".lid-toggle");
   const lidStatus = back_frogArticle.querySelector(".backpack__lid span");
+  const newArg = " Im passing this arg to the call back function";
 
   //Remember we could use  this.innerText if it was a function
   //declaration since arrow function expression does not have this.
   //that is why we used buttontoggle.innerText
 
   // buttontoggle.addEventListener(
+
   //   "click",
   //   function(e){
   //     this.innerText === "Open Lid"
@@ -73,16 +84,12 @@ const contentArray = backfrogArray.map((item) => {
 
   buttontoggle.addEventListener(
     "click",
-    // (e) => {
-    //   buttontoggle.innerText === "Open Lid"
-    //     ? (buttontoggle.innerText = "Close Lid")
-    //     : (buttontoggle.innerText = "Open Lid");
-
-    //   lidStatus.innerText === "open"
-    //     ? (lidStatus.innerText = "closed")
-    //     : (lidStatus.innerText = "open");
-    // },
-    findPackId, //if it has arg, then use arrow fcn and call FindId()inside
+    (event) => {
+      findPackId(newArg, buttontoggle, event); //pass newArg to callback
+      //Since arrow fcn does go with this we need to change
+      // this.parentElement to its buttontoggle and pass it as
+      //seconde arg
+    },
     false
   );
 
