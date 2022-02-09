@@ -38,8 +38,6 @@ const contentArray = backfrogArray.map((item) => {
      <button class='lid-toggle'> Open Lid </button>
      `;
 
-  let left = back_frogArticle.querySelectorAll(".backpack__strap span");
-
   const buttontoggle = back_frogArticle.querySelector(".lid-toggle");
   const lidStatus = back_frogArticle.querySelector(".backpack__lid span");
 

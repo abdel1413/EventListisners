@@ -6,19 +6,35 @@ const NewLength = (strapdata) => {
   strapdata.forEach((listelement) => {
     //get the side we want to work with using getAttribute
     let side = listelement.getAttribute("data-side");
-    console.log(side);
+    //console.log(side);
 
     //create a form inside which we'll create input and btn
-    const form = document.createElement("form");
-    form.classList.add(`${side}length`);
-    form.innerHTML = `<input  type='number' name="${side}length" placeholder=" New ${side} length "/>
+    const straplengthform = document.createElement("form");
+
+    //add class to the straplength form
+    straplengthform.classList.add(`${side}length`);
+
+    //populate the straplengthform with input and btn
+    straplengthform.innerHTML = `<input  type='number' name="${side}length" placeholder=" New ${side} length "/>
       <button>Update</button>
       `;
-    listelement.append(form);
+
+    //add event listener
+    straplengthform.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      //get the value from the form input
+      let newValue = straplengthform.querySelector("input").value;
+      console.log(newValue);
+
+      //set the newValue into the span field
+      console.log("span", listelement.querySelector("span").innerText);
+      listelement.querySelector("span").innerText = `${newValue}`;
+    });
+
+    listelement.append(straplengthform);
   });
 };
-
-console.log(NewLength);
 
 // Add event listener to each of the strap length forms.
 //  * - Update strap length value with value submitted from form
@@ -27,8 +43,8 @@ console.log(NewLength);
 //Note when callback fcn has arg, we call it inside
 //arrou fcn with open-close parenthesis: ()=>{callback(arg)}
 const findPackId = function (newArg, buttontoggle, event) {
-  console.log(newArg);
-  console.log(event);
+  //   console.log(newArg);
+  //   console.log(event);
   const findId = backfrogArray.find(
     ({ id }) => id === buttontoggle.parentElement.id // parentElement = article created
   );
