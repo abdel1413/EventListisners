@@ -1,5 +1,25 @@
 import backfrogArray from "./component/data.js";
 
+const findPackId = function () {
+  const findId = backfrogArray.find(({ id }) => id === this.parentElement.id);
+
+  //toggle lid open status
+  findId.lidOpend === true
+    ? (findId.lidOpend = false)
+    : (findId.lidOpend = true);
+
+  //toggle button text
+  this.innerText === "Open Lid"
+    ? (this.innerText = "Close Lid")
+    : (this.innerText = "Open Lid");
+
+  //set the lid status
+  let lidStatus = this.parentElement.querySelector(".backpack__lid span");
+  lidStatus.innerText === "closed"
+    ? (lidStatus.innerText = "open")
+    : (lidStatus.innerText = "closed");
+};
+
 const contentArray = backfrogArray.map((item) => {
   const back_frogArticle = document.createElement("article");
   back_frogArticle.classList.add("backpack");
@@ -40,6 +60,10 @@ const contentArray = backfrogArray.map((item) => {
 
   let left = back_frogArticle.querySelectorAll(".backpack__strap span");
 
+  // for (let i of left) {
+  //   console.log(i);
+  // }
+
   const buttontoggle = back_frogArticle.querySelector(".lid-toggle");
   const lidStatus = back_frogArticle.querySelector(".backpack__lid span");
 
@@ -62,16 +86,16 @@ const contentArray = backfrogArray.map((item) => {
 
   buttontoggle.addEventListener(
     "click",
-    (e) => {
-      buttontoggle.innerText === "Open Lid"
-        ? (buttontoggle.innerText = "Close Lid")
-        : (buttontoggle.innerText = "Open Lid");
+    // (e) => {
+    //   buttontoggle.innerText === "Open Lid"
+    //     ? (buttontoggle.innerText = "Close Lid")
+    //     : (buttontoggle.innerText = "Open Lid");
 
-      lidStatus.innerText === "open"
-        ? (lidStatus.innerText = "closed")
-        : (lidStatus.innerText = "open");
-    },
-    // findPackId, //if it has arg, then use arrow fcn and call FindId()inside
+    //   lidStatus.innerText === "open"
+    //     ? (lidStatus.innerText = "closed")
+    //     : (lidStatus.innerText = "open");
+    // },
+    findPackId, //if it has arg, then use arrow fcn and call FindId()inside
     false
   );
 

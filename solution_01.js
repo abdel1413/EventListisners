@@ -1,5 +1,28 @@
 import backfrogArray from "./component/data.js";
 
+//create a fucn that update the strap
+const NewLength = (strapdata) => {
+  //loop thru strap array
+  strapdata.forEach((listelement) => {
+    //get the side we want to work with using getAttribute
+    let side = listelement.getAttribute("data-side");
+    console.log(side);
+
+    //create a form inside which we'll create input and btn
+    const form = document.createElement("form");
+    form.classList.add(`${side}length`);
+    form.innerHTML = `<input  type='number' name="${side}length" placeholder=" New ${side} length "/>
+      <button>Update</button>
+      `;
+    listelement.append(form);
+  });
+};
+
+console.log(NewLength);
+
+// Add event listener to each of the strap length forms.
+//  * - Update strap length value with value submitted from form
+
 //create a callback function with args
 //Note when callback fcn has arg, we call it inside
 //arrou fcn with open-close parenthesis: ()=>{callback(arg)}
@@ -50,10 +73,10 @@ const contentArray = backfrogArray.map((item) => {
      <li class='feature backpack__pockets'>Number of pockets: <span> ${
        item.pocketNum
      }</span></li>
-     <li class='feature backpack__strap'> Strap left length: <span> ${
+     <li class='feature backpack__strap' data-side='left'> Strap left length: <span> ${
        item.strapLength.left
      }</span> inches</li>
-     <li class='feature backpack__strap'> Strap right length: <span> ${
+     <li class='feature backpack__strap' data-side='right'> Strap right length: <span> ${
        item.strapLength.right
      }</span> inches</li>
       <li class=' feature backpack__lid'>Lid status: <span> ${
@@ -67,7 +90,11 @@ const contentArray = backfrogArray.map((item) => {
 
   const buttontoggle = back_frogArticle.querySelector(".lid-toggle");
   const lidStatus = back_frogArticle.querySelector(".backpack__lid span");
-  const newArg = " Im passing this arg to the call back function";
+  const newArg = "Im passing this arg to the call back function";
+
+  const strapData = back_frogArticle.querySelectorAll(".backpack__strap");
+  console.log(strapData);
+  NewLength(strapData); //call fcn NewLength and pass strapdata
 
   //Remember we could use  this.innerText if it was a function
   //declaration since arrow function expression does not have this.
